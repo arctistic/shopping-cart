@@ -1,6 +1,6 @@
 import React from 'react';
 
-class CartItem extends React.Component {
+
     // constructor(){    // CONSTRUCTOR NOT REQUIRED as we are new using props so no state require to be initialized
     //     super();
     //     this.state = {
@@ -29,7 +29,7 @@ class CartItem extends React.Component {
     //     })
     // }
 
-    increaseQuantity = () => {          // not using right now
+    // increaseQuantity = () => {          // not using right now
         /* METHOD 1 : setState - passing an object
         The setState func comes from React.Component as we are inheriting from it we are able to use it (this is one way of doing it, if the previous state is not required*/
         /**BATCHING: if there are many setState functions, the component is rendered only ONCE, taking the modified attribute of the object that it returns on the last setState function (shallow merging) */
@@ -60,81 +60,82 @@ class CartItem extends React.Component {
 
         /*setState function is ASYNCHRONOUS therefore the code written after the setState function does not wait for the setState function to end it will run anyway.
         To wait for the setState function to end we can write the following code inside the callback function as another parameter of setState function */
-        this.setState((prevState)=>{
-            return {
-                qty: prevState.qty + 1
-            }
-        }, () => {
-            console.log('this.state', this.state);
-        })
+    //     this.setState((prevState)=>{
+    //         return {
+    //             qty: prevState.qty + 1
+    //         }
+    //     }, () => {
+    //         console.log('this.state', this.state);
+    //     })
         
-    }
+    // }
 
-    decreaseQuantity = () => {                  // Not using right now
-        const { qty } = this.state
-        this.setState((prevState => {
-            if (qty > 1){
-                return {qty: prevState.qty - 1};
-            }else{
-                return;
-            }
-        }))
-    }
+    // decreaseQuantity = () => {                  // Not using right now
+    //     const { qty } = this.state
+    //     this.setState((prevState => {
+    //         if (qty > 1){
+    //             return {qty: prevState.qty - 1};
+    //         }else{
+    //             return;
+    //         }
+    //     }))
+    // }
 
-    render () {
-        // console.log('this.props', this.props)
-        const {price, title, qty} = this.props.product;
-        const {
-            product,
-            onDecreaseQuantity,
-            onIncreaseQuantity,
-            onDeleteProduct,
-        } = this.props;
-        return (
-            <div className="cart-item">
-                <div className="left-block">
-                    <img alt="" style={styles.image}/>
-                </div>
-                <div className="right-block">
-                    <div style={{fontSize: 25}}>{title}</div>
-                    <div style={{color: '#777'}}>Rs: {price}</div>
-                    <div style={{color: '#777'}}>Qty: {qty}</div>
-                    <div className="cart-item-actions">
-                        {/* Buttons */}
-                        <img 
-                            alt="decrease" 
-                            className="action-icons" 
-                            src="https://www.flaticon.com/svg/static/icons/svg/1828/1828906.svg" 
-                            onClick={ //this.decreaseQuantity
-                                () => {onDecreaseQuantity(product)}
-                            
+
+const CartItem = (props) => {
+    // console.log('this.props', this.props)
+    const {price, title, qty} = props.product;
+    const {
+        product,
+        onDecreaseQuantity,
+        onIncreaseQuantity,
+        onDeleteProduct,
+    } = props;
+    return (
+        <div className="cart-item">
+            <div className="left-block">
+                <img alt="" style={styles.image} src={product.img}/>
+            </div>
+            <div className="right-block">
+                <div style={{fontSize: 25}}>{title}</div>
+                <div style={{color: '#777'}}>Rs: {price}</div>
+                <div style={{color: '#777'}}>Qty: {qty}</div>
+                <div className="cart-item-actions">
+                    {/* Buttons */}
+                    <img 
+                        alt="decrease" 
+                        className="action-icons" 
+                        src="https://www.flaticon.com/svg/static/icons/svg/1828/1828906.svg" 
+                        onClick={ //this.decreaseQuantity
+                            () => {onDecreaseQuantity(product)}
+                        
+                        }
+                    />
+                    <img 
+                        alt="increase" 
+                        className="action-icons" 
+                        src="https://www.flaticon.com/svg/static/icons/svg/992/992651.svg" 
+                        onClick={
+                            () => {
+                                onIncreaseQuantity(product)
                             }
-                        />
-                        <img 
-                            alt="increase" 
-                            className="action-icons" 
-                            src="https://www.flaticon.com/svg/static/icons/svg/992/992651.svg" 
-                            onClick={
-                                () => {
-                                    onIncreaseQuantity(product)
-                                }
-                                /* Need to bind this either here or in constructor
-                                or make use of Arrow functions*/
-                            }
-                        />
-                        <img 
-                            alt="delete" 
-                            className="action-icons" 
-                            src="https://www.flaticon.com/svg/static/icons/svg/1214/1214428.svg" 
-                            onClick={
-                                () => {onDeleteProduct(product.id)}
-                            }
-                        />
-                    </div>
+                            /* Need to bind this either here or in constructor
+                            or make use of Arrow functions*/
+                        }
+                    />
+                    <img 
+                        alt="delete" 
+                        className="action-icons" 
+                        src="https://www.flaticon.com/svg/static/icons/svg/1214/1214428.svg" 
+                        onClick={
+                            () => {onDeleteProduct(product.id)}
+                        }
+                    />
                 </div>
             </div>
-        )
-    }
+        </div>
+    )
+    
 }
 
 const styles = {
@@ -142,7 +143,8 @@ const styles = {
         height: 110,
         width: 110,
         borderRadius: 4,
-        background: "#ccc"
+        background: "#ccc",
+        objectFit: 'cover'
     }
 }
 
