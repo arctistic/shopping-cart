@@ -29,7 +29,7 @@ class CartItem extends React.Component {
     //     })
     // }
 
-    increaseQuantity = () => {
+    increaseQuantity = () => {          // not using right now
         /* METHOD 1 : setState - passing an object
         The setState func comes from React.Component as we are inheriting from it we are able to use it (this is one way of doing it, if the previous state is not required*/
         /**BATCHING: if there are many setState functions, the component is rendered only ONCE, taking the modified attribute of the object that it returns on the last setState function (shallow merging) */
@@ -70,7 +70,7 @@ class CartItem extends React.Component {
         
     }
 
-    decreaseQuantity = () => {
+    decreaseQuantity = () => {                  // Not using right now
         const { qty } = this.state
         this.setState((prevState => {
             if (qty > 1){
@@ -82,8 +82,14 @@ class CartItem extends React.Component {
     }
 
     render () {
-        console.log('this.props', this.props)
+        // console.log('this.props', this.props)
         const {price, title, qty} = this.props.product;
+        const {
+            product,
+            onDecreaseQuantity,
+            onIncreaseQuantity,
+            onDeleteProduct,
+        } = this.props;
         return (
             <div className="cart-item">
                 <div className="left-block">
@@ -99,20 +105,30 @@ class CartItem extends React.Component {
                             alt="decrease" 
                             className="action-icons" 
                             src="https://www.flaticon.com/svg/static/icons/svg/1828/1828906.svg" 
-                            onClick={this.decreaseQuantity}
+                            onClick={ //this.decreaseQuantity
+                                () => {onDecreaseQuantity(product)}
+                            
+                            }
                         />
                         <img 
                             alt="increase" 
                             className="action-icons" 
                             src="https://www.flaticon.com/svg/static/icons/svg/992/992651.svg" 
-                            onClick={this.increaseQuantity 
+                            onClick={
+                                () => {
+                                    onIncreaseQuantity(product)
+                                }
                                 /* Need to bind this either here or in constructor
-                                or make use of Arrow functions*/}
+                                or make use of Arrow functions*/
+                            }
                         />
                         <img 
                             alt="delete" 
                             className="action-icons" 
                             src="https://www.flaticon.com/svg/static/icons/svg/1214/1214428.svg" 
+                            onClick={
+                                () => {onDeleteProduct(product.id)}
+                            }
                         />
                     </div>
                 </div>
