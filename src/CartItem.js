@@ -10,24 +10,24 @@ class CartItem extends React.Component {
             img: ''
         }
         // this.increaseQuantity = this.increaseQuantity.bind(this)
-        this.testing();
+        // this.testing();
     }
 
-    testing(){
-        const promise = new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve('done');
-            }, 5000);
-        })
-        promise.then(() => {
-            this.setState({ qty: this.state.qty + 10 });
-            this.setState({ qty: this.state.qty + 10 });
-            this.setState({ qty: this.state.qty + 10 });
-            // setState works like a synchronous call in a promise
-            // thus all setState will add up and the code below will only execute after the setState
-            console.log('state', this.state)
-        })
-    }
+    // testing(){
+    //     const promise = new Promise((resolve, reject) => {
+    //         setTimeout(() => {
+    //             resolve('done');
+    //         }, 5000);
+    //     })
+    //     promise.then(() => {
+    //         this.setState({ qty: this.state.qty + 10 });
+    //         this.setState({ qty: this.state.qty + 10 });
+    //         this.setState({ qty: this.state.qty + 10 });
+    //         // setState works like a synchronous call in a promise
+    //         // thus all setState will add up and the code below will only execute after the setState
+    //         console.log('state', this.state)
+    //     })
+    // }
 
     increaseQuantity = () => {
         /* METHOD 1 : setState - passing an object
