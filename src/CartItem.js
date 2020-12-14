@@ -1,17 +1,17 @@
 import React from 'react';
 
 class CartItem extends React.Component {
-    constructor(){
-        super();
-        this.state = {
-            price : 999,
-            title: 'Phone',
-            qty: 1,
-            img: ''
-        }
-        // this.increaseQuantity = this.increaseQuantity.bind(this)
-        // this.testing();
-    }
+    // constructor(){    // CONSTRUCTOR NOT REQUIRED as we are new using props so no state require to be initialized
+    //     super();
+    //     this.state = {
+    //         price : 999,
+    //         title: 'Phone',
+    //         qty: 1,
+    //         img: ''
+    //     }
+    //     // this.increaseQuantity = this.increaseQuantity.bind(this)
+    //     // this.testing();
+    // }
 
     // testing(){
     //     const promise = new Promise((resolve, reject) => {
@@ -82,7 +82,8 @@ class CartItem extends React.Component {
     }
 
     render () {
-        const {price, title, qty} = this.state;
+        console.log('this.props', this.props)
+        const {price, title, qty} = this.props.product;
         return (
             <div className="cart-item">
                 <div className="left-block">
@@ -105,7 +106,7 @@ class CartItem extends React.Component {
                             className="action-icons" 
                             src="https://www.flaticon.com/svg/static/icons/svg/992/992651.svg" 
                             onClick={this.increaseQuantity 
-                                /* Need to bind this either here or constructor
+                                /* Need to bind this either here or in constructor
                                 or make use of Arrow functions*/}
                         />
                         <img 
